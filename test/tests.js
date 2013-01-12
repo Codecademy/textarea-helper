@@ -23,8 +23,8 @@ describe('textareaHelper', function () {
   });
 
   it('should change position when the caret moves', function () {
-    $('.foo').val('foo');
-    $('.foo')[0].selectionEnd = 3;
+    $('.foo').val('foofoofoofoofoo');
+    $('.foo')[0].selectionEnd = 7;
     var obj = $('.foo').textareaHelper('caretPos');
     expect(obj.top).to.equal(first.top);
     expect(obj.left).to.be.above(first.left);
