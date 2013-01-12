@@ -1,8 +1,6 @@
 describe('textareaHelper', function () {
   it('should get a mirror element if no method was passed', function () {
-    $expect($('.foo').textareaHelper()).to.be.a('div')
-                                           .and.has.css('overflow', 'auto')
-                                           .and.has.css('left', '-9999px');
+    expect($('.foo').textareaHelper()[0].nodeName).to.equal('DIV');
   });
 
   var first;
