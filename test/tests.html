@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <textarea class="foo">foo</textarea>
+    <script src="mocha.js"></script>
+    <script src="expect.js"></script>
+    <script src="jquery.js"></script>
+    <script src="../textarea-helper.js"></script>
+    <script src="jquery-expect.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="tests.js"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
