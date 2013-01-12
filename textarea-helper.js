@@ -62,6 +62,7 @@
 
     this.height = function () {
       this.update();
+      this.$mirror.css('height', '');
       return this.$mirror.height();
     };
   }).call(TextareaHelper.prototype);

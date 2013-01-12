@@ -30,11 +30,34 @@ describe('textareaHelper', function () {
     expect(obj.left).to.be.above(first.left);
   });
 
+  it('should get height', function () {
+    var h = $('.foo').val('\n').textareaHelper('height');
+    var h2 = $('.foo').val('\n\n').textareaHelper('height');
+    var h3 = $('.foo').val('\n\n\n\n').textareaHelper('height');
+    expect(h2).to.be.above(h);
+    // increase at the same rate.
+    expect((h + ((h2 - h) * 3))).to.be.equal(h3);
+  });
+
   it('should destroy itself', function () {
     $('.foo').textareaHelper('destroy')
     expect(
       $('.foo').next().css('left') === '-9999px'
     ).to.not.be.ok();
+  });
+
+  it('should work on collection and not conflict', function () {
+    // Make sure all is destroyed.
+    $('textarea').val('').textareaHelper('destroy');
+    // Init.
+    $('textarea').textareaHelper();
+
+    var first;
+    $('textarea').each(function (i, elem) {
+      expect(
+        $(elem).next().css('left') === '-9999px'
+      ).to.be.ok();
+    });
   });
 
 });
