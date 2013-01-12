@@ -1,7 +1,6 @@
 (function ($) {
   'use strict';
 
-  
   var caretClass   = 'textarea-helper-caret'
     , dataKey      = 'textarea-helper'
 
