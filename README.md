@@ -5,6 +5,11 @@ A small library that mirrors a textarea's content onto a div to add some interes
 
 [Demo](http://jsfiddle.net/5KqmF/12/).
 
+# Running the tests
+
+    open test/tests.html
+
+
 # Usage
 
     $('#myText').textareaHelper();
