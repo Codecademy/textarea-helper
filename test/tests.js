@@ -47,8 +47,8 @@ describe('textareaHelper', function () {
 
   it('should get height', function () {
     var h = $('.foo').val('\n').textareaHelper('height');
-    var h2 = $('.foo').val('\n\n\n').textareaHelper('height');
-    var h3 = $('.foo').val('\n\n\n\n\n\n\n').textareaHelper('height');
+    var h2 = $('.foo').val('\n\n').textareaHelper('height');
+    var h3 = $('.foo').val('\n\n\n\n').textareaHelper('height');
     expect(h2).to.be.above(h);
     // increase at the same rate.
     expect((h + ((h2 - h) * 3))).to.be.equal(h3);
