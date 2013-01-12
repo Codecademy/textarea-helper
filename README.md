@@ -5,8 +5,8 @@ A small library that mirrors a textarea's content onto a div to add some interes
 
 # Usage
 
-$('#myText').textareaHelper();
-$('#myText').textareaHelper(method);
+    $('#myText').textareaHelper();
+    $('#myText').textareaHelper(method);
 
 ## Methods
 
