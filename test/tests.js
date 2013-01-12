@@ -1,6 +1,17 @@
 describe('textareaHelper', function () {
-  it('should get a mirror element if no method was passed', function () {
-    expect($('.foo').textareaHelper()[0].nodeName).to.equal('DIV');
+  it('should create a mirror on initialize', function () {
+    $('.foo').textareaHelper();
+    var mirror = $('.foo').next().get(0);
+    expect(mirror.nodeName).to.equal('DIV');
+    expect($(mirror).css('left')).to.equal('-9999px');
+    expect($(mirror).css('position')).to.equal('absolute');
+  });
+
+  it('should init once', function () {
+    $('.foo').textareaHelper();
+    expect(
+      $('.foo').next().next().css('left') === '-9999px'
+    ).to.not.be.ok();
   });
 
   var first;
@@ -17,6 +28,13 @@ describe('textareaHelper', function () {
     var obj = $('.foo').textareaHelper('caretPos');
     expect(obj.top).to.equal(first.top);
     expect(obj.left).to.be.above(first.left);
+  });
+
+  it('should destroy itself', function () {
+    $('.foo').textareaHelper('destroy')
+    expect(
+      $('.foo').next().css('left') === '-9999px'
+    ).to.not.be.ok();
   });
 
 });
