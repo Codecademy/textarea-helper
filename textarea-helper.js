@@ -1,9 +1,11 @@
 (function ($) {
   'use strict';
 
-  // Styles that could influence size of the mirrored element.
+  
   var caretClass   = 'textarea-helper-caret'
     , dataKey      = 'textarea-helper'
+
+    // Styles that could influence size of the mirrored element.
     , mirrorStyles = [ 
                        // Box Styles.
                        'box-sizing', 'height', 'width', 'padding-bottom'
@@ -27,19 +29,21 @@
                                    , 'word-wrap'   : 'break-word'
                                    , 'top'         : 0
                                    , 'left'        : -9999
-                                   });
-    // Copy styles that could influence size. See `mirrorStyles`.
-    var styles = {};
-    for (var i = 0, style; style = mirrorStyles[i]; i++) {
-      styles[style] = this.$text.css(style);
-    }
-    this.$mirror.css(styles).insertAfter(this.$text);
+                                   }).insertAfter(this.$text);
   };
 
   (function () {
     var createText = document.createTextNode.bind(document);
     this.update = function () {
-      this.$mirror.empty();
+
+      // Copy styles.
+      var styles = {};
+      for (var i = 0, style; style = mirrorStyles[i]; i++) {
+        styles[style] = this.$text.css(style);
+      }
+      this.$mirror.css(styles).empty();
+
+      // Update content and insert caret.
       var caretPos = this.$text[0].selectionEnd
         , str      = this.$text.val()
         , pre      = createText(str.substring(0, caretPos))
