@@ -33,7 +33,6 @@
   };
 
   (function () {
-    var createText = document.createTextNode.bind(document);
     this.update = function () {
 
       // Copy styles.
@@ -44,10 +43,10 @@
       this.$mirror.css(styles).empty();
 
       // Update content and insert caret.
-      var caretPos = this.$text[0].selectionEnd
+      var caretPos = this.getOriginalCaretPos()
         , str      = this.$text.val()
-        , pre      = createText(str.substring(0, caretPos))
-        , post     = createText(str.substring(caretPos))
+        , pre      = document.createTextNode(str.substring(0, caretPos))
+        , post     = document.createTextNode(str.substring(caretPos))
         , $car     = $('<span/>').addClass(caretClass).html('&nbsp;');
       this.$mirror.append(pre, $car, post)
                   .scrollTop(this.$text.scrollTop());
@@ -69,6 +68,28 @@
       this.$mirror.css('height', '');
       return this.$mirror.height();
     };
+
+    // XBrowser caret position
+    // Adapted from http://stackoverflow.com/questions/263743/how-to-get-caret-position-in-textarea
+    this.getOriginalCaretPos = function () {
+      var text = this.$text[0];
+      if (text.selectionStart) {
+        return text.selectionStart;
+      } else if (document.selection) {
+        text.focus();
+        var r = document.selection.createRange();
+        if (r == null) {
+          return 0;
+        }
+        var re = text.createTextRange()
+          , rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+        return rc.text.length;
+      } 
+      return 0;
+    };
+
   }).call(TextareaHelper.prototype);
   
   $.fn.textareaHelper = function (method) {

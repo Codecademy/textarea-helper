@@ -22,18 +22,33 @@ describe('textareaHelper', function () {
     expect(obj.top).to.be.a('number');
   });
 
+  // http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
+  function setSelectionRange(input, selectionStart, selectionEnd) {
+    if (input.setSelectionRange) {
+      input.focus();
+      input.setSelectionRange(selectionStart, selectionEnd);
+    }
+    else if (input.createTextRange) {
+      var range = input.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', selectionEnd);
+      range.moveStart('character', selectionStart);
+      range.select();
+    }
+  }
+
   it('should change position when the caret moves', function () {
     $('.foo').val('foofoofoofoofoo');
-    $('.foo')[0].selectionEnd = 7;
+    setSelectionRange($('.foo')[0], 5, 10);  
     var obj = $('.foo').textareaHelper('caretPos');
     expect(obj.top).to.equal(first.top);
     expect(obj.left).to.be.above(first.left);
-  });
+  }); 
 
   it('should get height', function () {
     var h = $('.foo').val('\n').textareaHelper('height');
-    var h2 = $('.foo').val('\n\n').textareaHelper('height');
-    var h3 = $('.foo').val('\n\n\n\n').textareaHelper('height');
+    var h2 = $('.foo').val('\n\n\n').textareaHelper('height');
+    var h3 = $('.foo').val('\n\n\n\n\n\n\n').textareaHelper('height');
     expect(h2).to.be.above(h);
     // increase at the same rate.
     expect((h + ((h2 - h) * 3))).to.be.equal(h3);
