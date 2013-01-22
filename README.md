@@ -3,7 +3,7 @@ textareaHelper
 
 A small library that mirrors a textarea's content onto a div to add some interesting functionality.
 
-[Demo](http://jsfiddle.net/5KqmF/12/).
+[Demo](http://jsfiddle.net/5KqmF/41/).
 
 # Running the tests
 
