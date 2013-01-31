@@ -40,7 +40,10 @@
         styles[style] = this.$text.css(style);
       }
       this.$mirror.css(styles).empty();
-
+  	
+      this._dir = (this.$text[0].dir != "")? this.$text[0].dir : document.body.dir;
+      this.$mirror[0].dir = this._dir;
+      
       // Update content and insert caret.
       var caretPos = this.getOriginalCaretPos()
         , str      = this.$text.val()
@@ -59,7 +62,14 @@
 
     this.caretPos = function () {
       this.update();
-      return this.$mirror.find('.' + caretClass).position();
+      var $caret =  this.$mirror.find('.' + caretClass);
+      var _position = $caret.position();
+      if(this._dir == "rtl"){
+      	_position.right = this.$mirror.innerWidth() - _position.left - $caret.width();
+      	_position.left = "auto";
+      }
+      
+      return _position;
     };
 
     this.height = function () {
