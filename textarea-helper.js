@@ -17,6 +17,9 @@
                        // Spacing etc.
                      , 'word-spacing', 'letter-spacing', 'line-height'
                      , 'text-decoration', 'text-indent', 'text-transform' 
+                     
+                      // The direction
+                     , 'direction'
                      ];
 
   var TextareaHelper = function (elem) {
@@ -40,9 +43,8 @@
         styles[style] = this.$text.css(style);
       }
       this.$mirror.css(styles).empty();
-  	
-      this._dir = (this.$text[0].dir != "")? this.$text[0].dir : document.body.dir;
-      this.$mirror[0].dir = this._dir;
+		
+      this._dir = (this.$text.css('direction') != "")? this.$text.css('direction') : document.body.css('direction');
       
       // Update content and insert caret.
       var caretPos = this.getOriginalCaretPos()
