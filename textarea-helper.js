@@ -44,7 +44,7 @@
       }
       this.$mirror.css(styles).empty();
 		
-      this._dir = (this.$text.css('direction') != "")? this.$text.css('direction') : document.body.css('direction');
+      this._dir = (this.$text.css('direction') != "")? this.$text.css('direction') : $(document.body).css('direction');
       
       // Update content and insert caret.
       var caretPos = this.getOriginalCaretPos()
