@@ -37,10 +37,14 @@ describe('textareaHelper', function () {
     }
   }
 
+  function fillAndSelect($el) {
+    $el.val('foofoofoofoofoo');
+    setSelectionRange($el[0], 5, 10);  
+    return $el.textareaHelper('caretPos');
+  }
+
   it('should change position when the caret moves', function () {
-    $('.foo').val('foofoofoofoofoo');
-    setSelectionRange($('.foo')[0], 5, 10);  
-    var obj = $('.foo').textareaHelper('caretPos');
+    var obj = fillAndSelect($('.foo'));
     expect(obj.top).to.equal(first.top);
     expect(obj.left).to.be.above(first.left);
   }); 
@@ -75,4 +79,10 @@ describe('textareaHelper', function () {
     });
   });
 
+  it('should work with rtl', function () {
+    var $div = $('<div/>').css('direction', 'rtl').appendTo('body').append('<textarea>');
+    var pos = fillAndSelect($div.find('textarea'));
+    expect(pos.right).to.be.above(0);
+    expect(pos.left).to.equal('auto');
+  });
 });

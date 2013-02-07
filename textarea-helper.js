@@ -18,7 +18,7 @@
                      , 'word-spacing', 'letter-spacing', 'line-height'
                      , 'text-decoration', 'text-indent', 'text-transform' 
                      
-                      // The direction
+                      // The direction.
                      , 'direction'
                      ];
 
@@ -43,8 +43,6 @@
         styles[style] = this.$text.css(style);
       }
       this.$mirror.css(styles).empty();
-		
-      this._dir = (this.$text.css('direction') != "")? this.$text.css('direction') : $(document.body).css('direction');
       
       // Update content and insert caret.
       var caretPos = this.getOriginalCaretPos()
@@ -64,14 +62,14 @@
 
     this.caretPos = function () {
       this.update();
-      var $caret =  this.$mirror.find('.' + caretClass);
-      var _position = $caret.position();
-      if(this._dir == "rtl"){
-      	_position.right = this.$mirror.innerWidth() - _position.left - $caret.width();
-      	_position.left = "auto";
+      var $caret =  this.$mirror.find('.' + caretClass)
+        , pos    = $caret.position();
+      if (this.$text.css('direction') === 'rtl') {
+        pos.right = this.$mirror.innerWidth() - pos.left - $caret.width();
+        pos.left = 'auto';
       }
-      
-      return _position;
+
+      return pos;
     };
 
     this.height = function () {
