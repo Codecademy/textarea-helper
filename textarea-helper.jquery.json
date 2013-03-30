@@ -1,0 +1,22 @@
+{
+  "name": "textarea-helper",
+  "version": "0.3.0",
+  "title": "Textarea Helper plugin",
+  "author": {
+    "name": "Amjad Masad",
+    "email": "amjad.masad@gmail.com",
+    "url": "http://amasad.me"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "description": "Makes it possible to query the height of the textarea content and the XY coordinates of the caret position",
+  "keywords": ["textarea", "height", "caret", "position", "XY", "coordinates", "mirror"],
+  "demo": "http://jsfiddle.net/5KqmF/41/",
+  "dependencies": {
+    "jquery": ">=1.5"
+  }
+}
