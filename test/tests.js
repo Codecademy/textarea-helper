@@ -1,4 +1,9 @@
 describe('textareaHelper', function () {
+
+  afterEach(function () {
+    $('.foo').textareaHelper('destroy');
+  });
+
   it('should create a mirror on initialize', function () {
     $('.foo').textareaHelper();
     var mirror = $('.foo').next().get(0);
@@ -85,4 +90,17 @@ describe('textareaHelper', function () {
     expect(pos.right).to.be.above(0);
     expect(pos.left).to.equal('auto');
   });
+
+  // Issue #3
+  it('should work on the last character', function () {
+    var $t = $('<textarea/>').appendTo('body');
+    after(function () {
+      $t.remove();
+    });
+    var prev = $t.val('a').textareaHelper('caretPos').top;
+    $t.width(323).val('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    setSelectionRange($t[0], $t.val().length, $t.val().length);
+    expect($t.textareaHelper('caretPos').top).to.be(prev);
+  });
+
 });

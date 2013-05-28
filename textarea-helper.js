@@ -49,7 +49,7 @@
         , str      = this.$text.val()
         , pre      = document.createTextNode(str.substring(0, caretPos))
         , post     = document.createTextNode(str.substring(caretPos))
-        , $car     = $('<span/>').addClass(caretClass).html('&nbsp;');
+        , $car     = $('<span/>').addClass(caretClass).css('position', 'absolute').html('&nbsp;');
       this.$mirror.append(pre, $car, post)
                   .scrollTop(this.$text.scrollTop());
     };
@@ -62,7 +62,7 @@
 
     this.caretPos = function () {
       this.update();
-      var $caret =  this.$mirror.find('.' + caretClass)
+      var $caret = this.$mirror.find('.' + caretClass)
         , pos    = $caret.position();
       if (this.$text.css('direction') === 'rtl') {
         pos.right = this.$mirror.innerWidth() - pos.left - $caret.width();
