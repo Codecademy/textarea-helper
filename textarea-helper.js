@@ -2,6 +2,7 @@
   'use strict';
 
   var caretClass   = 'textarea-helper-caret'
+    , endClass     = 'textarea-helper-end'
     , dataKey      = 'textarea-helper'
 
     // Styles that could influence size of the mirrored element.
@@ -32,6 +33,7 @@
                                    , 'top'         : 0
                                    , 'left'        : -9999
                                    }).insertAfter(this.$text);
+    this.$mirrorfull = this.$mirror.clone().insertAfter(this.$mirror);
   };
 
   (function () {
@@ -43,19 +45,26 @@
         styles[style] = this.$text.css(style);
       }
       this.$mirror.css(styles).empty();
-      
+      this.$mirrorfull.css(styles).empty();
+
       // Update content and insert caret.
       var caretPos = this.getOriginalCaretPos()
         , str      = this.$text.val()
         , pre      = document.createTextNode(str.substring(0, caretPos))
         , post     = document.createTextNode(str.substring(caretPos))
-        , $car     = $('<span/>').addClass(caretClass).css('position', 'absolute').html('&nbsp;');
-      this.$mirror.append(pre, $car, post)
+        , $car     = $('<span/>').addClass(caretClass).css('position', 'absolute').html('\u0338')
+        , $end     = $('<span/>').addClass(endClass).css('position', 'absolute').html('\u0338') 
+        , full    = document.createTextNode(str);
+ 
+      this.$mirror.append(pre, $car, post, $end)
                   .scrollTop(this.$text.scrollTop());
+      this.$mirrorfull.append(full, $end.clone())
+                  .scrollTop(this.$text.scrollTop());             
     };
 
     this.destroy = function () {
       this.$mirror.remove();
+      this.$mirrorfull.remove();
       this.$text.removeData(dataKey);
       return null;
     };
@@ -64,8 +73,9 @@
       this.update();
       var $caret = this.$mirror.find('.' + caretClass)
         , pos    = $caret.position();
+      var diff = this.$mirrorfull.find('.' + endClass).position().left - this.$mirror.find('.' + endClass).position().left;
       if (this.$text.css('direction') === 'rtl') {
-        pos.right = this.$mirror.innerWidth() - pos.left - $caret.width();
+        pos.right = this.$mirror.innerWidth() - pos.left - $caret.width() - diff;
         pos.left = 'auto';
       }
 
@@ -75,6 +85,7 @@
     this.height = function () {
       this.update();
       this.$mirror.css('height', '');
+      this.$mirrorfull.css('height', '');
       return this.$mirror.height();
     };
 
