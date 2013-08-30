@@ -1,0 +1,28 @@
+{
+  "name": "textarea-helper",
+  "main": "textarea-helper.js",
+  "version": "0.3.1",
+  "homepage": "https://github.com/Codecademy/textarea-helper",
+  "authors": [
+    "Amjad Masad <amjad.masad@gmail.com>"
+  ],
+  "description": "Makes it possible to query the height of the textarea content and the XY coordinates of the caret position",
+  "keywords": [
+    "textarea",
+    "height",
+    "caret",
+    "position",
+    "xy",
+    "coordinates",
+    "mirror",
+    "autogrow"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
