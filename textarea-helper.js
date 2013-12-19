@@ -99,6 +99,23 @@
       return 0;
     };
 
+    //Adapted from http://stackoverflow.com/a/3651232
+    this.setCaretPos = function(){
+      var text = this.$text[0];
+      if(text.setSelectionRange)
+      {
+        text.setSelectionRange(arguments[1], arguments[1]);
+      }
+      else if(text.createTextRange)
+      {
+        var range = text.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', arguments[1]);
+        range.moveStart('character', arguments[1]);
+        range.select();
+      }
+    };
+
   }).call(TextareaHelper.prototype);
   
   $.fn.textareaHelper = function (method) {
@@ -112,7 +129,7 @@
     });
     if (method) {
       var instance = this.first().data(dataKey);
-      return instance[method]();
+      return instance[method].apply(instance, arguments);
     } else {
       return this;
     }
