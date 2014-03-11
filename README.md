@@ -1,7 +1,10 @@
 textareaHelper
 --------------
 
-A small library that mirrors a textarea's content onto a div to add some interesting functionality.
+A small library that mirrors a textarea's content onto a `<div>` to add some interesting functionality:
+
+* query the height of the textarea content
+* get the XY coordinates of the caret position
 
 [Demo](http://jsfiddle.net/5KqmF/112/).
 
