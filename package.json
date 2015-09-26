@@ -1,0 +1,14 @@
+{
+  "name": "textarea-helper",
+  "version": "0.3.1",
+  "description": "**textareaHelper** is a small library that mirrors a textarea's content onto a <div> to add functionality to query the height and the carent position",
+  "main": "textarea-helper.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Codecademy/textarea-helper"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "open test/tests.html"
+  }
+}
