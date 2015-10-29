@@ -13,5 +13,8 @@
 , "unused": true
 , "predef": {
     "jQuery": false
-  }
+    ,"define": false
+    ,"module": false
+    ,"require": false
+ }
 }
