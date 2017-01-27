@@ -34,7 +34,10 @@
                      ];
 
   var TextareaHelper = function (elem) {
-    if (elem.nodeName.toLowerCase() !== 'textarea') return;
+    if ( (elem.nodeName.toLowerCase() !== 'textarea') &&
+      (elem.nodeName.toLowerCase() !== 'input')){
+        return;  
+    } 
     this.$text = $(elem);
     this.$mirror = $('<div/>').css({ 'position'    : 'absolute'
                                    , 'overflow'    : 'auto'
