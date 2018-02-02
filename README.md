@@ -35,3 +35,4 @@ Destorys the helper mirror object. Use for cleanup.
 # License
 
 MIT
+Copyright (c) <2013> <Codecademy>
