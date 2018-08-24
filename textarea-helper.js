@@ -93,8 +93,8 @@
     // Adapted from http://stackoverflow.com/questions/263743/how-to-get-caret-position-in-textarea
     this.getOriginalCaretPos = function () {
       var text = this.$text[0];
-      if (text.selectionStart) {
-        return text.selectionStart;
+      if (typeof text.selectionStart === 'number') {
+        return text.value.length;
       } else if (document.selection) {
         text.focus();
         var r = document.selection.createRange();
